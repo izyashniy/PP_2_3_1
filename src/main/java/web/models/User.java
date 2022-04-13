@@ -1,6 +1,7 @@
 package web.models;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "user")
@@ -68,7 +69,18 @@ public class User {
         this.age = age;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && age == user.age && name.equals(user.name) && lastname.equals(user.lastname);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, lastname, age);
+    }
 
     @Override
     public String toString() {
